@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\CarbonInterval;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 
@@ -24,7 +25,7 @@ class RecipeResource extends JsonResource
             'content' => $this->content,
             'difficulty' => config('properties.difficulty.' . $this->difficulty),
             'servings' => $this->servings,
-            'preparation_time' =>$this->preparation_time,
+            'preparation_time' => CarbonInterval::seconds($this->preparation_time)->cascade()->format('%h:%i'),
             'nutrients' => NutrientResource::make($this->nutrient),
             'ingredients' => IngredientResource::collection($this->ingredients),
             'steps' => StepResource::collection($this->steps),
