@@ -11,6 +11,12 @@ class Recipe extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'servings' => 'integer',
+        'difficulty' => 'integer',
+        'preparation_time' => 'integer'
+    ];
+
     public function getRouteKeyName()
     {
         return 'slug';

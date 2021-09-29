@@ -11,6 +11,10 @@ class Ingredient extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'quantity' => 'integer'
+    ];
+
     public function recipe()
     {
         return $this->belongsTo(Recipe::class);
