@@ -11,12 +11,12 @@ class RecipeController extends Controller
 {
     public function index()
     {
-        return RecipeResource::collection(Recipe::with('ingredients')->with('steps')->with('comments')->get());
+        return RecipeResource::collection(Recipe::all());
     }
 
     public function store(RecipeStoreRequest $request)
     {
-        $recipe = Recipe::create($request->all());
+        $recipe = Recipe::create($request->validated());
         if ($request->has('ingredients')) $recipe->ingredients()->createMany($request->ingredients);
         if ($request->has('steps')) $recipe->steps()->createMany($request->steps);
 
@@ -25,7 +25,7 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {
-        //
+        return RecipeResource::make($recipe);
     }
 
     public function edit(Recipe $recipe)

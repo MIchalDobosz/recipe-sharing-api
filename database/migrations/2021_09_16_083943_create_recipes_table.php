@@ -20,6 +20,9 @@ class CreateRecipesTable extends Migration
             $table->string('slug')->unique();
             $table->string('description')->nullable();
             $table->text('content');
+            $table->integer('servings');
+            $table->integer('preparation_time');
+            $table->string('difficulty');
             $table->timestamps();
         });
     }

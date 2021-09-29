@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IngredientResource extends JsonResource
+class NutrientResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,10 @@ class IngredientResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name' => $this->name,
-            'quantity' => $this->quantity,
-            'unit' => config('properties.units.' . $this->unit) 
+            'calories' => $this->calories,
+            'protein' => $this->protein,
+            'fat' => $this->fat,
+            'carbs' => $this->carbs
         ];
     }
 }

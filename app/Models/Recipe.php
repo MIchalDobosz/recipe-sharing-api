@@ -9,9 +9,12 @@ class Recipe extends Model
 {
     use HasFactory;
 
-    protected $guarded = [
-        'id'
-    ];
+    protected $guarded = ['id'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function ingredients()
     {
@@ -26,5 +29,15 @@ class Recipe extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasManyThrough(Category::class, RecipeCategory::class);
+    }
+
+    public function nutrient()
+    {
+        return $this->hasOne(Nutrient::class);
     }
 }

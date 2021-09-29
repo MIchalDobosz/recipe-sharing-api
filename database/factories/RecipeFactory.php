@@ -29,7 +29,10 @@ class RecipeFactory extends Factory
             'title' => $title,
             'slug' => $slug,
             'description' => $this->faker->sentence(25),
-            'content' => $this->faker->sentence(70)
+            'content' => $this->faker->sentence(70),
+            'servings' => $this->faker->numberBetween(1, 8),
+            'preparation_time' => $this->faker->numberBetween(300, 7200),
+            'difficulty' => array_rand(config('properties.difficulty'), 1)
         ];
     }
 }

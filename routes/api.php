@@ -21,4 +21,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('recipes', RecipeController::class)->except(['create', 'edit']);
-Route::resource('recipes.comments', IngredientController::class)->except(['show', 'create', 'edit']);

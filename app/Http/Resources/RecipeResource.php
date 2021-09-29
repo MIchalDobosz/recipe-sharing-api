@@ -22,6 +22,7 @@ class RecipeResource extends JsonResource
             'slug' => $this->slug,
             'description' => $description,
             'content' => $this->content,
+            'nutrients' => NutrientResource::make($this->nutrient),
             'ingredients' => IngredientResource::collection($this->ingredients),
             'steps' => StepResource::collection($this->steps),
             'comments' => CommentResource::collection($this->comments),

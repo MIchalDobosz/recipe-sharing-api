@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Step extends Model
+class Category extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function recipe()
+    public function recipes()
     {
-        return $this->belongsTo(Recipe::class);
+        return $this->hasManyThrough(Recipe::class, RecipeCategory::class);
     }
 }
