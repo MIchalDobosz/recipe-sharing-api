@@ -27,6 +27,7 @@ class RecipeResource extends JsonResource
             'servings' => $this->servings,
             'preparation_time' => CarbonInterval::seconds($this->preparation_time)->cascade()->format('%h:%i'),
             'nutrients' => NutrientResource::make($this->nutrient),
+            'categories' => CategoryResource::collection($this->categories),
             'ingredients' => IngredientResource::collection($this->ingredients),
             'steps' => StepResource::collection($this->steps),
             'comments' => CommentResource::collection($this->comments),

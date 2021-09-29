@@ -13,6 +13,6 @@ class Category extends Model
 
     public function recipes()
     {
-        return $this->hasManyThrough(Recipe::class, RecipeCategory::class);
+        return $this->belongsToMany(Recipe::class, 'recipes_categories');
     }
 }

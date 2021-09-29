@@ -19,13 +19,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Recipe::factory()
+        $recipes = Recipe::factory()
             ->count(10)
             ->has(Ingredient::factory()->count(rand(5, 12)))
             ->has(Step::factory()->count(rand(4, 10)))
             ->has(Comment::factory()->count(rand(0, 4)))
-            ->has(Category::factory()->count(rand(1, 3)))
             ->has(Nutrient::factory()->count(1))
             ->create();
+
+        $categories = Category::factory()->count(5)->create();
+        
+        $recipes->each(function($recipe) use ($categories)
+        {
+            $recipe->categories()->attach(
+                $categories->random(rand(1, 3))->pluck('id')->toArray()
+            );
+        });
     }
 }

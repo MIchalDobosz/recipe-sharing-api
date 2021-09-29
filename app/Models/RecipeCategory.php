@@ -11,14 +11,4 @@ class RecipeCategory extends Model
 
     protected $table = 'recipes_categories';
     protected $guarded = ['id'];
-
-    public function recipes()
-    {
-        return $this->hasMany(Recipe::class);
-    }
-
-    public function categories()
-    {
-        return $this->hasMany(Category::class);
-    }
 }

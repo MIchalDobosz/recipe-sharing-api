@@ -18,7 +18,6 @@ class CreateRecipesCategoriesTable extends Migration
             $table->id();
             $table->foreignId('recipe_id')->constrained('recipes');
             $table->foreignId('category_id')->constrained('categories');
-            $table->timestamps();
         });
     }
 

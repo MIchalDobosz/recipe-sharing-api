@@ -39,7 +39,7 @@ class Recipe extends Model
 
     public function categories()
     {
-        return $this->hasManyThrough(Category::class, RecipeCategory::class);
+        return $this->belongsToMany(Category::class, 'recipes_categories');
     }
 
     public function nutrient()
