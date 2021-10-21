@@ -28,11 +28,6 @@ class RecipeController extends Controller
         return RecipeResource::make($recipe);
     }
 
-    public function edit(Recipe $recipe)
-    {
-        //
-    }
-
     public function update(Request $request, Recipe $recipe)
     {
         //
