@@ -27,10 +27,18 @@ class RecipeStoreRequest extends FormRequest
             'title' => 'required',
             'slug' => 'required',
             'content' => 'required',
-            'ingredients.*.name' => 'required',
-            'ingredients.*.quantity' => 'required',
-            'ingredients.*.unit' => 'required',
-            'steps.*.content' => 'required'
+            'ingredients.*.name' => 'sometimes|required',
+            'ingredients.*.quantity' => 'sometimes|required|numeric',
+            'ingredients.*.unit' => 'sometimes|required',
+            'steps.*.content' => 'sometimes|required',
+            'categories' => 'required|array',
+            'nutrient.calories' => 'sometimes|required',
+            'nutrient.protein' => 'sometimes|required',
+            'nutrient.carbs' => 'sometimes|required',
+            'nutrient.fat' => 'sometimes|required',
+            'servings' => 'required',
+            'preparation_time' => 'required',
+            'difficulty' => 'required'
         ];
     }
 }
