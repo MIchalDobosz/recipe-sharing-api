@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
-class RecipeStoreRequest extends FormRequest
+class RecipeUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class RecipeStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->route('recipe')->user_id === Auth::user()->id;
     }
 
     /**

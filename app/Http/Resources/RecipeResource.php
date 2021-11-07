@@ -19,8 +19,10 @@ class RecipeResource extends JsonResource
         $description = ($this->description) ?? Str::substr($this->content, 0, 150);
 
         return [
+            'user' => UserResource::make($this->user),
             'title' => $this->title,
             'slug' => $this->slug,
+            'main_image' => FileResource::make($this->mainImage),
             'description' => $description,
             'content' => $this->content,
             'difficulty' => config('properties.difficulty.' . $this->difficulty),
@@ -30,6 +32,7 @@ class RecipeResource extends JsonResource
             'categories' => CategoryResource::collection($this->categories),
             'ingredients' => IngredientResource::collection($this->ingredients),
             'steps' => StepResource::collection($this->steps),
+            'images' => FileResource::collection($this->images),
             'comments' => CommentResource::collection($this->comments),
         ];
     }

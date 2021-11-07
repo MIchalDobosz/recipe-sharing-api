@@ -28,7 +28,7 @@ class RecipeFactory extends Factory
         return [
             'title' => $title,
             'slug' => $slug,
-            'description' => $this->faker->sentence(25),
+            'description' => $this->faker->sentence(20),
             'content' => $this->faker->sentence(70),
             'servings' => $this->faker->numberBetween(1, 8),
             'preparation_time' => $this->faker->numberBetween(300, 7200),

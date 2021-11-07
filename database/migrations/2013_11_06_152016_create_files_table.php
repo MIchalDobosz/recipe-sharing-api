@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNutrientsTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateNutrientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('nutrients', function (Blueprint $table)
+        Schema::create('files', function (Blueprint $table)
         {
             $table->id();
-            $table->integer('calories')->nullable();
-            $table->integer('protein')->nullable();
-            $table->integer('fat')->nullable();
-            $table->integer('carbs')->nullable();
-            $table->foreignId('recipe_id')->constrained('recipes');
+            $table->string('path');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateNutrientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nutrients');
+        Schema::dropIfExists('files');
     }
 }

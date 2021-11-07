@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::resource('recipes', RecipeController::class)->only(['index', 'show']);
+Route::get('users/{user}', [UserController::class, 'show']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 
@@ -26,5 +27,6 @@ Route::post('login', [UserController::class, 'login']);
 Route::group(['middleware' => 'auth:sanctum'], function()
 {
     Route::post('logout', [UserController::class, 'logout']);
+    Route::resource('users', UserController::class, )->only(['update']);
     Route::resource('recipes', RecipeController::class)->only(['store', 'update', 'destroy']);
 });

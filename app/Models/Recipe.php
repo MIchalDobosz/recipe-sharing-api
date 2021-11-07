@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     protected $guarded = ['id'];
 
@@ -20,6 +23,13 @@ class Recipe extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getSlugOptions()
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 
     public function ingredients()
@@ -39,7 +49,7 @@ class Recipe extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'recipes_categories');
+        return $this->belongsToMany(Category::class, 'categories_recipes');
     }
 
     public function nutrient()
@@ -50,5 +60,15 @@ class Recipe extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(File::class, 'files_recipes');
+    }
+
+    public function getMainImageAttribute()
+    {
+        return $this->images()->wherePivot('main', true)->first();
     }
 }
