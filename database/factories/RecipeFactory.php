@@ -22,12 +22,8 @@ class RecipeFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence(8);
-        $slug = Str::slug($title, '-');
-
         return [
-            'title' => $title,
-            'slug' => $slug,
+            'title' => $this->faker->sentence(8),
             'description' => $this->faker->sentence(20),
             'content' => $this->faker->sentence(70),
             'servings' => $this->faker->numberBetween(1, 8),
