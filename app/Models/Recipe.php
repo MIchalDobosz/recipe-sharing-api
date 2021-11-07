@@ -25,7 +25,7 @@ class Recipe extends Model
         return 'slug';
     }
 
-    public function getSlugOptions()
+    public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
