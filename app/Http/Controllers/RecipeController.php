@@ -24,7 +24,7 @@ class RecipeController extends Controller
         if ($request->has('steps')) $recipe->steps()->createMany($request->steps);
         if ($request->has('categories')) $recipe->categories()->sync($request->categories);
         if ($request->has('nutrients')) $recipe->nutrient()->create($request->nutrients);
-        if ($request->has('images')) $recipe->images()->createMany(File::store($request->images, 'public', 'images'));
+        if ($request->has('images')) $recipe->images()->createMany(File::store($request->images, 'public', 'images'), ['main' => false]);
 
         return response(['message' => 'success']);
     }
