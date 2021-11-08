@@ -24,13 +24,12 @@ class File extends Model
 
     public static function store($files, $disk, $path)
     {
+        if (empty($files)) return [];
         if (gettype($files) !== 'array') return self::storeSingleFile($files, $disk, $path);
 
         $filesData = [];
         foreach ($files as $file)
-        {
-            $filesData[] = self::storeSingleFile($file, $disk, $path);
-        }
+            if (!empty($file)) $filesData[] = self::storeSingleFile($file, $disk, $path);
 
         return $filesData;
     }
