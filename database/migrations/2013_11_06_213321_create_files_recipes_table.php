@@ -18,7 +18,7 @@ class CreateFilesRecipesTable extends Migration
             $table->id();
             $table->foreignId('file_id')->constrained('files');
             $table->foreignId('recipe_id')->constrained('recipes');
-            $table->boolean('main');
+            $table->boolean('main')->default(false);
             $table->timestamps();
         });
     }
