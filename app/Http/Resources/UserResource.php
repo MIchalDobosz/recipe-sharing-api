@@ -19,7 +19,7 @@ class UserResource extends JsonResource
         return [
             'name' => $this->name,
             'first_name' => $this->first_name,
-            'last_name' => $this->first_name,
+            'last_name' => $this->last_name,
             'avatar' => FileResource::make($this->avatar)
         ];
     }

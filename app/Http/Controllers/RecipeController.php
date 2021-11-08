@@ -13,12 +13,12 @@ class RecipeController extends Controller
 {
     public function index()
     {
-        return RecipeResource::collection(Recipe::all());
+        return RecipeResource::collection(Recipe::orderBy('created_at', 'DESC')->get());
     }
 
     public function store(RecipeStoreRequest $request)
     {
-        $recipe = Recipe::create(array_merge($request->all(), ['user_id' => auth()->user()->id]));
+        $recipe = Recipe::create(array_merge($request->validated(), ['user_id' => auth()->user()->id]));
         if ($request->has('main_image')) $recipe->images()->create(File::store($request->main_image, 'public', 'main_images'), ['main' => true]);
         if ($request->has('ingredients')) $recipe->ingredients()->createMany($request->ingredients);
         if ($request->has('steps')) $recipe->steps()->createMany($request->steps);

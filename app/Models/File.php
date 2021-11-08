@@ -26,10 +26,12 @@ class File extends Model
     {
         if (gettype($files) !== 'array') return self::storeSingleFile($files, $disk, $path);
 
+        $filesData = [];
         foreach ($files as $file)
         {
             $filesData[] = self::storeSingleFile($file, $disk, $path);
         }
+
         return $filesData;
     }
 
