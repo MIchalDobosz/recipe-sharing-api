@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::resource('recipes', RecipeController::class)->only(['index', 'show']);
+Route::resource('recipes.comments', CommentController::class)->only(['index']);
 Route::get('users/{user}', [UserController::class, 'show']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
@@ -28,6 +29,8 @@ Route::get('categories', [CategoryController::class, 'index']);
 // Protected routes
 Route::group(['middleware' => 'auth:sanctum'], function()
 {
+    Route::resource('recipes.comments', CommentController::class)->only(['store', 'update', 'destroy']);
+    Route::resource('recipes.ratings', RatingsController::class)->only(['store', 'update', 'destroy']);
     Route::post('logout', [UserController::class, 'logout']);
     Route::resource('users', UserController::class, )->only(['update']);
     Route::resource('recipes', RecipeController::class)->only(['store', 'update', 'destroy']);

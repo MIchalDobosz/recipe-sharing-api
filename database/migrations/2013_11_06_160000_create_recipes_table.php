@@ -24,6 +24,7 @@ class CreateRecipesTable extends Migration
             $table->integer('servings')->nullable();
             $table->integer('preparation_time')->nullable();
             $table->string('difficulty')->nullable();
+            $table->float('rating', 2, 1)->default(0);
             $table->timestamps();
         });
     }

@@ -71,4 +71,14 @@ class Recipe extends Model
     {
         return $this->images()->wherePivot('main', true)->first();
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function updateRating()
+    {
+        $this->update(['rating' => $this->ratings()->avg('score')], ['timestamps' => false]);
+    }
 }

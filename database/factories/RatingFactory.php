@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Comment;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Rating;
+use App\Models\User;
 
-class CommentFactory extends Factory
+class RatingFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Comment::class;
+    protected $model = Rating::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +23,7 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'content' => $this->faker->sentence(10),
+            'score' => rand(1, 5),
             'user_id' => User::inRandomOrder()->first()->id
         ];
     }

@@ -33,7 +33,7 @@ class RecipeResource extends JsonResource
             'ingredients' => IngredientResource::collection($this->ingredients),
             'steps' => StepResource::collection($this->steps),
             'images' => FileResource::collection($this->images),
-            'comments' => CommentResource::collection($this->comments),
+            'rating' => $this->rating
         ];
     }
 }

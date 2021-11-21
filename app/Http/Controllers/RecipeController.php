@@ -7,7 +7,6 @@ use App\Http\Requests\RecipeUpdateRequest;
 use App\Http\Resources\RecipeResource;
 use App\Models\File;
 use App\Models\Recipe;
-use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
@@ -36,7 +35,7 @@ class RecipeController extends Controller
 
     public function update(RecipeUpdateRequest $request, Recipe $recipe)
     {
-        $recipe->update($request->all());
+        $recipe->update($request->validated());
 
         return response(['message' => 'success']);
     }
