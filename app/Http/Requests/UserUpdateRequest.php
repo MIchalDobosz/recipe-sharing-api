@@ -53,7 +53,7 @@ class UserUpdateRequest extends FormRequest
             'old_password' => 'required_with:password|password',
 
             'avatar' => 'image',
-            'description' => 'nullable',
+            'description' => 'nullable|max:500',
             'facebook_url' => 'url|regex:/^https:\/\/www.facebook.com\//',
             'instagram_url' => 'url|regex:/^https:\/\/www.instagram.com\//',
             'twitter_url' => 'url|regex:/^https:\/\/twitter.com\//',

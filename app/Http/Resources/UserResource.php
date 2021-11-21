@@ -20,6 +20,11 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'description' => $this->description,
+            'facebook_url' => $this->facebook_url,
+            'instagram_url' => $this->instagram_url,
+            'twitter_url' => $this->twitter_url,
+            'youtube_url' => $this->youtube_url,
             'avatar' => FileResource::make($this->avatar)
         ];
     }
