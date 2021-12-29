@@ -25,13 +25,13 @@ class RecipeStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'description' => 'nullable',
+            'title' => 'required|max:75',
+            'description' => 'nullable|max:250',
             'content' => 'required',
             'main_image' => 'nullable|image',
             'ingredients' => 'required|array',
             'ingredients.*' => 'required',
-            'ingredients.*.name' => 'required',
+            'ingredients.*.name' => 'required|max:25',
             'ingredients.*.quantity' => 'required_|numeric',
             'ingredients.*.unit' => 'required',
             'steps' => 'required|array',

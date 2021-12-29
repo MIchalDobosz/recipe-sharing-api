@@ -25,7 +25,8 @@ class UserResource extends JsonResource
             'instagram_url' => $this->instagram_url,
             'twitter_url' => $this->twitter_url,
             'youtube_url' => $this->youtube_url,
-            'avatar' => FileResource::make($this->avatar)
+            'avatar' => FileResource::make($this->avatar),
+            'recipes' => RecipeResource::collection($this->recipes)
         ];
     }
 }

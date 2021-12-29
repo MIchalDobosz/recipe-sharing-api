@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Requests\RecipeIndexRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +21,10 @@ class Recipe extends Model
         'difficulty' => 'integer',
         'preparation_time' => 'integer'
     ];
+
+    public const DEFAULT_SORT_FIELD = 'created_at';
+    public const DEFAULT_ORDER_TYPE = 'desc';
+    public const DEFAULT_PER_PAGE = 10;
 
     public function getRouteKeyName()
     {
@@ -80,5 +86,64 @@ class Recipe extends Model
     public function updateRating()
     {
         $this->update(['rating' => $this->ratings()->avg('score')], ['timestamps' => false]);
+    }
+
+    public static function getRecipes(RecipeIndexRequest $request)
+    {
+        $query = self::with('categories');
+        $query = self::getFilters($query, $request);
+        $query = self::getSort($query, $request);
+
+        return $query->paginate(self::DEFAULT_PER_PAGE);
+    }
+
+    private static function getSort(Builder $query, RecipeIndexRequest $request)
+    {
+        $sort = $request->has('sort') && !empty($request->sort) ? $request->sort : self::DEFAULT_SORT_FIELD;
+        $order = $request->has('order') && !empty($request->order) ? $request->order : self::DEFAULT_ORDER_TYPE;
+        $query->orderBy($sort, $order);
+
+        return $query;
+    }
+
+    private static function getFilters(Builder $query, RecipeIndexRequest $request)
+    {
+        // Categories
+        if ($request->has('categories') && !empty($request->categories))
+        {
+            foreach ($request->categories as $category)
+            {
+                $query->whereHas('categories', function($query) use ($category)
+                {
+                    $query->where('category_id', $category);
+                });
+            }
+        }
+
+        // Servings
+        if ($request->has('servings') && !empty($request->servings))
+        {
+            $query->where('servings', $request->servings);
+        }
+
+        // Difficulty
+        if ($request->has('difficulty') && !empty($request->difficulty))
+        {
+            $query->where('difficulty', $request->difficulty);
+        }
+
+        // Preparation Time
+        if ($request->has('preparation_time') && !empty($request->preparation_time))
+        {
+            $query->where('preparation_time', '<=', $request->preparation_time);
+        }
+
+        // Title
+        if ($request->has('title') && !empty($request->title))
+        {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+
+        return $query;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecipeIndexRequest;
 use App\Http\Requests\RecipeStoreRequest;
 use App\Http\Requests\RecipeUpdateRequest;
 use App\Http\Resources\RecipeResource;
@@ -10,9 +11,9 @@ use App\Models\Recipe;
 
 class RecipeController extends Controller
 {
-    public function index()
+    public function index(RecipeIndexRequest $request)
     {
-        return RecipeResource::collection(Recipe::orderBy('created_at', 'DESC')->get());
+        return RecipeResource::collection(Recipe::getRecipes($request));
     }
 
     public function store(RecipeStoreRequest $request)
