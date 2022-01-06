@@ -26,7 +26,6 @@ class UserResource extends JsonResource
             'twitter_url' => $this->twitter_url,
             'youtube_url' => $this->youtube_url,
             'avatar' => FileResource::make($this->avatar),
-            'recipes' => RecipeResource::collection($this->recipes)
         ];
     }
 }
