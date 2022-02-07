@@ -24,6 +24,8 @@ Route::resource('recipes.comments', CommentController::class)->only(['index']);
 Route::get('users/{user}', [UserController::class, 'show']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
+Route::post('forgot-password', [UserController::class, 'forgotPassword']);
+Route::post('reset-password', [UserController::class, 'resetPassword'])->name('password.reset');
 Route::get('categories', [CategoryController::class, 'index']);
 
 // Protected routes
